@@ -13,6 +13,7 @@ class Game:
         self.HEIGHT = (self.HEIGHT_GRID * 50) - 50
         self.WIDTH = (self.WIDTH_GRID * 50) - 50        
         self.score = 0
+        self.fitness = 0
         self.font = pygame.font.Font(None,32)
         self.surface = pygame.display.set_mode((self.WIDTH_GRID * 50, self.HEIGHT_GRID * 50))
         self.score_surf = self.font.render(str(self.score), False, (64,64,64))
@@ -63,17 +64,18 @@ class Game:
             self.snake.change_dir(selected_direction)
             previous_positions = self.snake.move()
             if self.check_wall_col() or self.snake.check_self_col(previous_positions):
-                return self.score
+                return self.fitness
             hit = self.apple.check_col(self.snake.cords, self.snake.open_cords)
             if hit:
-                self.score += 100
+                self.score += 1
+                self.fitness += 100
                 self.frames = 0
             if self.show:
                 self.draw()
                 self.clock.tick(self.tick)
             if hit:
                 self.snake.add_length()
-            self.score += 1
+            self.fitness -= 1
             self.frames += 1
             if self.frames > self.max_frames:
                 return 0

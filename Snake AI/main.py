@@ -2,8 +2,6 @@ import os
 import neat
 from pygame.locals import *
 from Game import Game
-import matplotlib.pyplot as plt
-import neat.graphs as graphs
 
 def run(config_path):
     config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,

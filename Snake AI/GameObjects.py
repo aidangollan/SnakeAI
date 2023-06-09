@@ -6,10 +6,11 @@ from pygame.locals import *
 class Snake:
     def __init__(self, parent_screen, parent_width, parent_height):
         self.parent_screen = parent_screen
-        self.cords = [[100,0], [50,0], [0,0]]
-        self.cords_set = {(100,0), (50,0), (0,0)}
-        self.directions = [[0,0],[0,0],[0,0]]
-        self.length = 3
+        cords = (random.randint(0,parent_width - 1) * 50, random.randint(0,parent_height - 1) * 50)
+        self.cords = [list(cords)]
+        self.cords_set = {cords}
+        self.directions = [[0,0]]
+        self.length = 1
         self.block = pygame.image.load("Snake AI/block.png").convert()
         self.possible_cords = set()
         for i in range(parent_width - 1):
