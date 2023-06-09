@@ -13,7 +13,7 @@ def run(config_path):
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
 
-    winner = p.run(fitness,50)
+    winner = p.run(fitness,1000)
 
     print(winner)
 
