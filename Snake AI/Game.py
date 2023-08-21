@@ -1,6 +1,6 @@
 import pygame
 import numpy as np
-from util import generate_output
+from util import generate_output, print_grid
 from pygame.locals import *
 from GameObjects import Snake
 from GameObjects import Apple
@@ -24,9 +24,9 @@ class Game:
         self.directions = [(0,-1), (0,1), (-1,0), (1,0)]
         self.show = show
         self.net = net
-        self.max_frames = 1000
+        self.max_frames = 300
         self.frames = 0
-        self.tick = 10
+        self.tick = 3
 
     def handle_quit(self):
         for event in pygame.event.get():  
@@ -58,8 +58,9 @@ class Game:
             self.draw()
         while True:
             self.handle_quit()
-            input = generate_output(self.snake.cords, self.apple.cords, self.WIDTH, self.HEIGHT)
+            input = generate_output(self.snake.cords_set, self.snake.cords[0], self.apple.cords, self.WIDTH, self.HEIGHT)
             output = self.net.activate(input)
+            print(output)
             selected_direction = self.directions[np.argmax(output)]
             self.snake.change_dir(selected_direction)
             previous_positions = self.snake.move()
